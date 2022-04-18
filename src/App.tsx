@@ -1,11 +1,8 @@
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useTransform,
-  useViewportScroll,
-} from 'framer-motion'
+import { Flex, Box, Link } from '@chakra-ui/react'
+import { useMotionTemplate, useMotionValue, useTransform, useViewportScroll } from 'framer-motion'
 import { useEffect, useRef } from 'react'
+
+import MotionBox from './MotionBox'
 import Article from './Article'
 import Logo from './Logo'
 
@@ -56,21 +53,42 @@ export default function App() {
   }, [pixelsScrolled, scrollY])
 
   return (
-    <div>
-      <motion.header
-        style={{ height, backgroundColor: backgroundColorTemplate }}
-        className='fixed inset-x-0 top-0 z-10 flex items-center shadow-sm backdrop-blur '
+    <Box>
+      <MotionBox
+        as='header'
+        display='flex'
+        alignItems='center'
+        shadow='sm'
+        backdropFilter='blur(8px)'
+        position='fixed'
+        insetX='0'
+        top='0'
+        zIndex='10'
+        style={{
+          height,
+          backgroundColor: backgroundColorTemplate,
+        }}
       >
-        <div className='flex items-center justify-between w-full max-w-3xl px-4 mx-auto'>
-          <a href='/' className='font-semibold leading-none text-stone-900'>
+        <Flex align='center' justify='space-between' width='full' maxWidth='3xl' px='4' mx='auto'>
+          <Link fontWeight='semibold' color='gray.900' lineHeight='none' href='/'>
             <Logo style={{ height: logoHeight }} />
-          </a>
-        </div>
-      </motion.header>
+          </Link>
+        </Flex>
+      </MotionBox>
 
-      <main className='max-w-3xl p-4 mx-auto pt-36 text-stone-700 font-serif text-lg space-y-4'>
+      <Box
+        as='main'
+        maxW='3xl'
+        p='4'
+        mx='auto'
+        pt='36'
+        color='gray.700'
+        fontFamily='serif'
+        fontSize='lg'
+        experimental_spaceY='4'
+      >
         <Article />
-      </main>
-    </div>
+      </Box>
+    </Box>
   )
 }
